@@ -7,9 +7,13 @@ import "./styles.css";
 function App() {
   const [repositories, setRepositories] = useState([]);
   useEffect(() => {
-    api.get("repositories").then((response) => {
+    async function getRepositories() {
+      const response = await api.get("repositories");
+
       setRepositories(response.data);
-    });
+    }
+
+    getRepositories();
   }, []);
 
   async function handleAddRepository() {
